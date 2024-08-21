@@ -12,6 +12,20 @@ const Screen = () => {
       console.log('blob:'+Blob);
       setblobUrl(Blob);
   }
+
+  //download functionality 
+  const downloadHandle=()=>{
+      const a = document.createElement('a');
+
+      console.log(a);
+      a.href = blobUrl;
+      a.download = "MyVideo.mp4";
+  
+      document.body.appendChild(a);
+      console.log(a);
+      a.click();
+      document.body.removeChild(a);
+  }
 //Component to show video
   const VideoFrame =()=>{
     return(
@@ -22,9 +36,9 @@ const Screen = () => {
   return (
 
     <div>
-      <ReactMediaRecorder 
+      <ReactMediaRecorder
       video={false}
-      
+      screen ={true}
       audio
       render={({ status, startRecording, stopRecording, mediaBlobUrl })=>{return(
         <div className='p-4 border-2 border-white rounded-md max-w-[40%] flex flex-col space-y-2'>
@@ -39,6 +53,13 @@ const Screen = () => {
   blobUrl && (<div className='max-w-[70%] mx-auto border-4 border-red-700 text-center'><VideoFrame></VideoFrame></div>)
  
 }
+{
+ blobUrl && ( <button className='p-4 bg-green-500 rounded-full' onClick={downloadHandle}>
+  Download Video
+</button>)
+}
+ 
+
 
     
     {/* <p>{mediaRecorder.status}</p>

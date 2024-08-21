@@ -1,0 +1,20 @@
+
+/* ${} */
+.innerBox{
+    /* background-color: black; */
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    border-radius: 20px;
+}
+.labelactive{
+    top: 0rem;
+    font-size:0.85rem ;
+}
+.signupmodeform{
+    left:55%;
+}
+.signupmodeinfo{
+    right:45%;
+}
+
+
