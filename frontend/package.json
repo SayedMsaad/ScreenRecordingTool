@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.111.2",
+    "@react-three/fiber": "^8.17.5",
     "axios": "^1.7.4",
+    "formik": "^2.4.6",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-media-recorder-2": "^1.6.23"
+    "react-media-recorder-2": "^1.6.23",
+    "three": "^0.167.1",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "eslint": "^8",
