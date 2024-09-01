@@ -11,7 +11,7 @@ router.get('/getAll',(req,res)=>{
         console.log(err);
     });
     
-})
+});
 
 router.post('/addUser',(req,res)=>
 {
@@ -23,7 +23,18 @@ router.post('/addUser',(req,res)=>
         res.status(500).json(err);
     });
     
-})
+});
+
+router.post('/authenticate',(req,res)=>{
+
+    Model.findOne(req.body)
+    .then((result) => {
+        res.status(200).json({message:"cred valid"});
+    }).catch((err) => {
+        res.status(500).json(err);
+    });
+   
+});
 
 
 module.exports = router;

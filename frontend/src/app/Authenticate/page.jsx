@@ -33,7 +33,14 @@ const Authenticate = () => {
             },
             onSubmit:(values,{resetForm})=>{
                 console.log(values);
-                resetForm();
+                axios.post('http://localhost:5000/u/authenticate',values)
+                .then((result) => {
+                    console.log(result.data.message);
+                }).catch((err) => {
+                    console.log(err);
+                });
+
+                // resetForm();
             },
             validationSchema :loginSchema,  
         })
