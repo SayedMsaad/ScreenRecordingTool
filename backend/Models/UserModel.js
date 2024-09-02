@@ -21,4 +21,9 @@ const mySchema = new Schema({
 
 });
 
+// mySchema.pre('save', function(next){
+
+// next();
+// })
+
 module.exports =model('SrcUser',mySchema);

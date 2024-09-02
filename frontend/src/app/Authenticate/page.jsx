@@ -31,18 +31,20 @@ const Authenticate = () => {
                 email :'',
                 password :'',
             },
-            onSubmit:(values,{resetForm})=>{
+            onSubmit:(values,{resetForm,setSubmitting})=>{
                 console.log(values);
+                setSubmitting=false;
                 axios.post('http://localhost:5000/u/authenticate',values)
                 .then((result) => {
                     console.log(result.data.message);
+                    setSubmitting = true;
+                    resetForm();
                 }).catch((err) => {
                     console.log(err);
                 });
-
-                // resetForm();
+               
             },
-            validationSchema :loginSchema,  
+            validationSchema :loginSchema,
         })
             return(
                 
@@ -120,7 +122,7 @@ const Authenticate = () => {
                 confirmPassword:'',
             },
             onSubmit:(values,{resetForm})=>{
-                console.log(values);
+                // console.log(values);
                 axios.post("http://localhost:5000/u/addUser",values).then((result) => {
                     console.log(result.status);
                     console.log(result.data);
