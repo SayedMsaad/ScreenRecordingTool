@@ -47,9 +47,12 @@ router.post('/authenticate',(req,res)=>{
     .then((result) => {
         console.log(result);
         if(!result){
-        return res.status(200).json({message:"Invalid Cred"});
+        return res.status(200).json({message:"Invalid Cred",isValid:false});
+        }else{
+        const token = jwtSignature(result._id);
+        res.cookie('jwt',token,{maxAge:maxAge*1000});
+        res.status(200).json({message:"Valid Cred",isValid:true});
         }
-        return res.status(200).json({message:"Valid Cred"});
 
     }).catch((err) => {
         console.log(err);

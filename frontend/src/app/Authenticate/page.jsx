@@ -3,21 +3,24 @@ import React, { useRef, useState } from 'react'
 import styles from './Authenticate.module.css';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Scene from '@/Component/Scene'
+import toast from 'react-hot-toast';
+// import Scene from '@/Component/Scene'
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const Authenticate = () => {
     // toggle states 
     const [labelToggel, setlabelToggel] = useState(false);
     const [signinToggle, setsigninToggle] = useState(false);
     // Toggle methods 
-    const displayOn =()=>{setlabelToggel(!labelToggel);}
-    const displayOff =()=>{ setlabelToggel(!labelToggel); }
+    const displayOn =()=>{setlabelToggel(true);}
+    const displayOff =()=>{ setlabelToggel(false); }
     const switchModes=()=>{ setsigninToggle(!signinToggle);}
 
     
 // to Display sign in component
     const DisplaySignIn =()=>{
+        const router = useRouter();
         const loginSchema = Yup.object().shape({
             email : Yup.string().email("Invalid Email").required('required'),
             password : Yup.string().required('Required')
@@ -33,12 +36,23 @@ const Authenticate = () => {
             },
             onSubmit:(values,{resetForm,setSubmitting})=>{
                 console.log(values);
-                setSubmitting=false;
-                axios.post('http://localhost:5000/u/authenticate',values)
+                 setSubmitting=false;
+                axios.post('http://localhost:5000/u/authenticate',values,{withCredentials:true})
                 .then((result) => {
                     console.log(result.data.message);
-                    setSubmitting = true;
-                    resetForm();
+                    if(result.data.isValid){
+                        toast.success("Login Succesfull");
+                        resetForm();
+                        router.push('/');
+                        
+                    }else{
+                    //    resetForm();\
+                    toast.error("Invalid credentials");
+                        displayOn();
+                        setSubmitting=true;
+                
+                    }
+                    
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -61,7 +75,7 @@ const Authenticate = () => {
 
                         <label htmlFor="email" className={`relative text-base top-10 text-slate-400 visible transition-all ease-in-out duration-500 ${labelToggel ? styles.labelactive : ''}`}>Email</label>
 
-                        <input type="email" id='email' required className='outline-none border-b-2 border-slate-300 py-2 mt-2' onFocus={displayOn} onBlur={displayOff} value={loginForm.values.email} onChange={loginForm.handleChange}
+                        <input type="email" id='email' required className='outline-none border-b-2 focus:border-black border-slate-300 py-2 mt-2 transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={loginForm.values.email} onChange={loginForm.handleChange}
                         />
                         {loginForm.touched.email && loginForm.errors.email ?(<p className='text-xs text-red-600'id='email-error'>
                             {loginForm.errors.email}
@@ -69,10 +83,11 @@ const Authenticate = () => {
 
                         <label htmlFor="password" className={`relative text-base top-10 text-slate-400 visible transition-all ease-in-out duration-500 ${labelToggel ? styles.labelactive : ''}`}>Password</label>
 
-                        <input type="password" id='password' required className='outline-none border-b-2 border-slate-300 py-2 mt-2' onFocus={displayOn} onBlur={displayOff} value={loginForm.values.password} onChange={loginForm.handleChange} aria-describedby='error-pass'/>
+                        <input type="password" id='password' required className='outline-none border-b-2 focus:border-black border-slate-300 py-2 mt-2 transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={loginForm.values.password} onChange={loginForm.handleChange} aria-describedby='error-pass'/>
                         {loginForm.touched.password && loginForm.errors.password ?(<p className='text-xs text-red-600'id='error-pass'>
                             {loginForm.errors.password}
                         </p>):null}
+                      
                         {/* submit btn */}
                         <button type="submit" className='mt-8 bg-black text-white rounded-xl p-2 font-bold'>Sign In</button>
 
@@ -123,7 +138,7 @@ const Authenticate = () => {
             },
             onSubmit:(values,{resetForm})=>{
                 // console.log(values);
-                axios.post("http://localhost:5000/u/addUser",values).then((result) => {
+                axios.post("http://localhost:5000/u/addUser",values,{withCredentials:true}).then((result) => {
                     console.log(result.status);
                     console.log(result.data);
                     
@@ -145,12 +160,12 @@ const Authenticate = () => {
                     <div className='text-sm mt-2'><span className='text-xs text-slate-400'>Already have a account?</span><span className='font-bold text-sm'><button onClick={switchModes}>Sign In</button>
                     </span></div>
                     {/* form element */}
-                    <form onSubmit={signUpForm.handleSubmit} className='flex flex-col'>
+                    <form onSubmit={signUpForm.handleSubmit} className='flex flex-col w-full'>
 
                         {/* input feilds */}
                         <div className='relative'>
                         <label htmlFor="name" className={`absolute text-base top-4 text-slate-400 visible transition-all ease-in-out duration-500 ${labelToggel ? styles.labelactive : ''}`}>Name</label>
-                        <input type="text" id='name' name='name' required className='outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff}value={signUpForm.values.name} onChange={signUpForm.handleChange}/> 
+                        <input type="text" id='name' name='name' required className='w-full outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff}value={signUpForm.values.name} onChange={signUpForm.handleChange}/> 
                         {signUpForm.touched.name && signUpForm.errors.name ?(<p className='text-xs text-red-600'>
                             {signUpForm.errors.name}
                         </p>):null}</div>
@@ -158,7 +173,7 @@ const Authenticate = () => {
 
                         <div className="relative">
                         <label htmlFor="semail" className={`absolute text-base top-4 text-slate-400 visible transition-all ease-in-out duration-500 ${labelToggel ? styles.labelactive : ''}`}>Email</label>
-                        <input type="email" id='semail' name='email' required className='outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={signUpForm.values.email} onChange={signUpForm.handleChange}/>
+                        <input type="email" id='semail' name='email' required className='w-full outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={signUpForm.values.email} onChange={signUpForm.handleChange}/>
                         
                         {signUpForm.touched.email && signUpForm.errors.email ?(<p className='text-xs text-red-600'>
                             {signUpForm.errors.email}
@@ -167,7 +182,7 @@ const Authenticate = () => {
                         <div className='relative'>
                         <label htmlFor="spassword" className={`absolute text-base top-4 text-slate-400 visible transition-all ease-in-out duration-500 ${labelToggel ? styles.labelactive : ''}`}>Password</label>
 
-                        <input type="password" id='spassword' name='password' required className='outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={signUpForm.values.password} onChange={signUpForm.handleChange} />
+                        <input type="password" id='spassword' name='password' required className='w-full outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={signUpForm.values.password} onChange={signUpForm.handleChange} />
                         {signUpForm.touched.password && signUpForm.errors.password ?(<p className='text-xs text-red-600'>
                             {signUpForm.errors.password}
                         </p>):null}</div>
@@ -175,7 +190,7 @@ const Authenticate = () => {
                         <div className='relative'>
                         <label htmlFor="confirmPassword" className={`absolute text-base top-4 text-slate-400 visible transition-all ease-in-out duration-500 ${labelToggel ? styles.labelactive : ''}`}>Confirm Password</label>
 
-                        <input type="password" id='confirmPassword' name='confirmPassword' required className='outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={signUpForm.values.confirmPassword} onChange={signUpForm.handleChange}/>
+                        <input type="password" id='confirmPassword' name='confirmPassword' required className='w-full outline-none border-b-2 border-slate-300 py-2 pb-0 mt-4 focus:border-black transition-all duration-200 ease-in' onFocus={displayOn} onBlur={displayOff} value={signUpForm.values.confirmPassword} onChange={signUpForm.handleChange}/>
                         {signUpForm.touched.confirmPassword && signUpForm.errors.confirmPassword ?(<p className='text-xs text-red-600'>
                             {signUpForm.errors.confirmPassword}
                         </p>):null}</div>
@@ -197,13 +212,13 @@ const Authenticate = () => {
             )
     }
 
-    const DisplayModel = () => {
-        return (
-          <main className='h-full w-full'>
-            <Scene />
-          </main>
-        )
-      }
+    // const DisplayModel = () => {
+    //     return (
+    //       <main className='h-full w-full'>
+    //         <Scene />
+    //       </main>
+    //     )
+    //   }
 
     return (
         <div className='bg-red-300 h-screen w-screen flex justify-center items-center'>
