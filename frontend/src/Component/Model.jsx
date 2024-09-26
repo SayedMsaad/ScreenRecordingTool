@@ -8,6 +8,7 @@ import React, { useEffect, useRef } from 'react'
 const Model = () => {
     
     const mesh = useRef();
+   
     const runOnce = useRef(false);
     const {nodes} = useGLTF('/media/donut.glb');
     const {viewport}= useThree();
@@ -15,6 +16,9 @@ const Model = () => {
     useFrame(()=>
     {
         mesh.current.rotation.x+=0.02;
+       
+       
+        
         // mesh.current.rotation.y+=0.001;
         // mesh.current.rotation.z+=0.001;
         // if(mesh.current.position.x <= 5){
@@ -32,6 +36,7 @@ const Model = () => {
     useEffect(() => {
         if(!runOnce.current)
         mesh.current.rotation.z+=320;
+        
         runOnce.current = true;
     }, [])
 
@@ -53,11 +58,12 @@ const Model = () => {
     };
     
   return (
-      <group scale={viewport.width/15}>
+      <group scale={viewport.width/25}>
         <Text position={[0,0,-0.5]} fontSize={2} color={'white'}>Hello World!</Text>
-        <mesh ref= {mesh} visible {...nodes.Torus} position={[0,0,0]}>
+        <mesh ref= {mesh} visible {...nodes.Torus} position={[5,2,0]}>
             <MeshTransmissionMaterial {...materialProps} />
         </mesh>
+      
       </group>
   )
 }
