@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import Nav from "@/components/Nav";
-import Record from "@/components/Recordnav";
+import Recordnav from "@/components/Recordnav";
 
 import localFont from "next/font/local";
 
@@ -34,7 +34,7 @@ export default function Home() {
         <button className={`bg-green-400 self-start py-4 px-6 rounded-2xl`}>Get Started</button>
 
       </div>
-      <div className="w-[45%]"><Record/></div>
+      <div className="w-[45%]"><Recordnav/></div>
     </div>
     <div className="w-full flex flex-col justify-center items-center mt-[5rem]">
       <p className={`${local.className} text-3xl`}>RECORD VIDEO ONLINE FOR FREE</p>
