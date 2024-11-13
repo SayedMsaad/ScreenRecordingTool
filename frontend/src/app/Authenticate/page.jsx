@@ -102,7 +102,7 @@ const Authenticate = () => {
 
                 </form>
                 <div className='mt-8 text-slate-400 text-sm'>
-                    <p>Don't have a account? <span className='underline'>Sign up</span> to get started</p>
+                    <p>Don&apos;t have a account? <span className='underline'>Sign up</span> to get started</p>
 
                 </div>
             </div>
@@ -207,7 +207,7 @@ const Authenticate = () => {
 
 
                 </form>
-            
+
             </div>
 
 
@@ -215,17 +215,9 @@ const Authenticate = () => {
         )
     }
 
-    // const DisplayModel = () => {
-    //     return (
-    //       <main className='h-full w-full absolute'>
-    //         <Scene />
-    //       </main>
-    //     )
-    //   }
-
     return (
         <div className="bg-black h-screen w-screen flex justify-center items-center overflow-hidden bg-gradient-to-l from-blue-500 via-purple-500 to-red-500">
-           
+
             <Vortex backgroundColor="black"
                 rangeY={100}
                 baseSpeed={0}
@@ -233,36 +225,36 @@ const Authenticate = () => {
                 baseHue={220}
 
                 className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full">
-                     <div className="bg-white/10 backdrop-blur-sm border border-white/10 shadow-2xl rounded-lg p-4 w-[60%] ">
-                <div className='w-full h-[70vh] p-4 flex items-center justify-center bg-transparent rounded-2xl'>
+                <div className="bg-white/10 backdrop-blur-sm border border-white/10 shadow-2xl rounded-lg p-4 w-[60%]">
+                    <div className='w-full h-[70vh] p-4 flex items-center justify-center bg-transparent rounded-2xl'>
 
 
-                    {/* innner div */}
-                    <div className={`${styles.innerBox} relative`}>
-                        <div className={`${styles.formWrap} ${signinToggle ? styles.signupmodeform : ''} grid grid-cols-1 grid-rows-1 h-[100%] w-[45%] p-8 absolute left-0 top-0 trasition-left duration-700 ease-in-out`}>
-                            {/* from side div */}
-                            {DisplaySignIn()}
+                        {/* innner div */}
+                        <div className={`${styles.innerBox} relative`}>
+                            <div className={`${styles.formWrap} ${signinToggle ? styles.signupmodeform : ''} grid grid-cols-1 grid-rows-1 h-[100%] w-[45%] p-8 absolute left-0 top-0 trasition-left duration-700 ease-in-out`}>
+                                {/* from side div */}
+                                {DisplaySignIn()}
 
-                            {DisplaySignUp()}
+                                {DisplaySignUp()}
+                            </div>
+
+                            {/* intro side div */}
+
+                            <div className={`${styles.infoWrap} ${signinToggle ? styles.signupmodeinfo : ''} p-4 h-[100%] w-[55%] bg-orange-100 rounded-3xl absolute right-0 top-0 transition-right duration-700 ease-in-out text-center`}>
+
+
+                                <img src="/images/cameraman1.png" alt="cameraman" className='h-full mx-auto' />
+
+
+                            </div>
+
+
                         </div>
-
-                        {/* intro side div */}
-
-                        <div className={`${styles.infoWrap} ${signinToggle ? styles.signupmodeinfo : ''} p-4 h-[100%] w-[55%] bg-orange-100 rounded-3xl absolute right-0 top-0 transition-right duration-700 ease-in-out text-center`}>
-
-
-                            <img src="/images/cameraman1.png" alt="cameraman" className='h-full mx-auto' />
-
-
-                        </div>
-
 
                     </div>
-
                 </div>
-            </div>
             </Vortex>
-           
+
             {/* {DisplayModel()} */}
             {/* <Particle 
         className="absolute inset-0"
@@ -274,7 +266,7 @@ const Authenticate = () => {
             {/* <Meteors
         number ={20}/> */}
             {/* main div  */}
-           
+
         </div>
     )
 }

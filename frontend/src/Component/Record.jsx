@@ -1,12 +1,14 @@
 'use client'
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react'
-import { useRouter } from 'next/router'
+
 
 const Record = () => {
-    const router = useRouter();
+  const router = useRouter();
     const routing =()=>
-    {
-        router.push('/record');
+    {  
+        router.push("/record");
     }
   return (
     <div className='bg-gray-200 rounded-2xl w-full'>
@@ -28,7 +30,7 @@ const Record = () => {
                    <p>Sound</p></li>
                 </ul>
             </div>
-            <button className='border-2 border-black bg-transparent text-balck text-medium self-start p-4 flex gap-2 justify-center rounded-2xl'><img src="/images/record.svg" alt="" onClick={routing} />Start Recording</button>
+            <Link href={"/Record"} className='border-2 border-black bg-transparent text-balck text-medium self-start p-4 flex gap-2 justify-center rounded-2xl'><img src="/images/record.svg" alt=""/>Start Recording</Link>
 
             <div><p className='text-gray-500 text-xs'>Supported browsers: Google Chrome, Mozilla Firefox, Microsoft Edge, Opera</p></div>
         </div>

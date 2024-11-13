@@ -2,33 +2,19 @@
 import Image from "next/image";
 import Nav from "@/Component/Nav";
 import Record from "@/Component/Record";
-import { Roboto,Montserrat,Open_Sans,Nunito_Sans} from 'next/font/google'
+
 import localFont from "next/font/local";
 
 const local = localFont({src:'../Fonts/GrandisExtended-Bold.ttf'})
-const roboto = Roboto({
-  weight: ['500','900'],
-  subsets: ['latin'],
-})
-const monst = Montserrat({
-  weight: ['700'],
-  subsets: ['latin'],
-})
-const openSans = Open_Sans({
-  weight: ['600'],
-  subsets: ['latin'],
-})
-const nunito = Nunito_Sans({
-  weight: ['700'],
-  subsets: ['latin'],
-})
+
 
 export default function Home() {
   return (
     <div className="mx-[5%]">
       <Nav>
     </Nav>
-    <div className="w-full outline outline-yellow-400 flex">
+    
+    <div className="w-full flex mt-8">
       <div className="w-[55%] flex flex-col justify-evenly">
         <div className={`${local.className} text-4xl`}><p>DESKTOP SCREEN</p>
         <p>RECORDER</p></div>
@@ -45,13 +31,18 @@ export default function Home() {
             </li>
         </ul>
 
-        <button className={`bg-green-400 self-start py-4 px-6 rounded-2xl ${roboto.className}`}>Get Started</button>
+        <button className={`bg-green-400 self-start py-4 px-6 rounded-2xl`}>Get Started</button>
 
       </div>
       <div className="w-[45%]"><Record/></div>
-      
     </div>
+    <div className="w-full flex flex-col justify-center items-center mt-[5rem]">
+      <p className={`${local.className} text-3xl`}>RECORD VIDEO ONLINE FOR FREE</p>
+      <p className="w-[70%] text-sm text-center mt-4">A free online screen recorder is perfect for saving anything shown on your display in just a couple of clicks. Use our no-install tool for recording screens as many times as you want – no download or payment needed!</p>
     </div>
+
+    </div>
+    //ending tag
     
   )
 }
