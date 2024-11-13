@@ -1,9 +1,15 @@
 'use client'
+import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react'
-import { ReactMediaRecorder } from 'react-media-recorder-2'
+// import { ReactMediaRecorder } from 'react-media-recorder-2'
 import axios from 'axios'
 import localFont from "next/font/local";
 import toast from 'react-hot-toast'
+// const {ReactMediaRecorder} =dynamic(() => import('react-media-recorder-2'), { ssr: false });
+const ReactMediaRecorder = dynamic(
+  () => import('react-media-recorder-2').then((mod) => mod.ReactMediaRecorder),
+  { ssr: false }
+);
 
 const local = localFont({ src: '../../Fonts/GrandisExtended-Black.ttf' })
 const Record = () => {
