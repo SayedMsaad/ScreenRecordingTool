@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import Nav from "@/components/Nav";
-import Record from "@/components/Record";
+import Record from "@/components/Recordnav";
 
 import localFont from "next/font/local";
 

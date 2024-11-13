@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation';
 import React from 'react'
 
 
-const Record = () => {
+const Recordnav = () => {
   const router = useRouter();
     const routing =()=>
     {  
-        router.push("/record");
+        router.push("/Record");
     }
   return (
     <div className='bg-gray-200 rounded-2xl w-full'>
@@ -39,4 +39,4 @@ const Record = () => {
   )
 }
 
-export default Record
+export default Recordnav
