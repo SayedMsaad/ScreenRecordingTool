@@ -5,9 +5,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import localFont from "next/font/local";
 import toast from 'react-hot-toast'
-// const {ReactMediaRecorder} =dynamic(() => import('react-media-recorder-2'), { ssr: false });
+// const {ReactMediaRecorder} =dynamic(() => import('react-media-recorder'), { ssr: false });
 const ReactMediaRecorder = dynamic(
-  () => import('react-media-recorder-2').then((mod) => mod.ReactMediaRecorder),
+  () => import('react-media-recorder').then((mod) => mod.ReactMediaRecorder),
   { ssr: false }
 );
 
