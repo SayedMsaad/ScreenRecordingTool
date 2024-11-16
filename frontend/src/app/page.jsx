@@ -10,7 +10,7 @@ const local = localFont({src:'../Fonts/GrandisExtended-Bold.ttf'})
 
 export default function Home() {
   return (
-    <div className="mx-[5%]">
+    <div className="">
       <Nav>
     </Nav>
     
