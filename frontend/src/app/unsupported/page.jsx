@@ -10,7 +10,7 @@ export default function UnsupportedDevice() {
       <div className="bg-white p-8 rounded-xl shadow-lg max-w-2xl w-full">
         <h2 className="text-2xl font-semibold mb-4 text-gray-800">Device Not Supported</h2>
         <p className="text-gray-600 mb-6">
-          We're sorry, but screen recording is currently only supported on desktop devices. 
+          We&apos;re sorry, but screen recording is currently only supported on desktop devices. 
           Mobile devices are not supported at this time.
         </p>
         <div className="flex justify-center space-x-8 mb-8">

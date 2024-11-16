@@ -356,7 +356,7 @@ export default function Record() {
               <ul className="list-disc list-inside space-y-2 text-gray-600">
                 <li>Ensure your desktop is clean and organized before recording</li>
                 <li>Close unnecessary applications to improve performance</li>
-                <li>Use a good quality microphone if you're including audio</li>
+                <li>Use a good quality microphone if you&apos;re including audio</li>
                 <li>Plan your content beforehand for smoother recordings</li>
                 <li>Keep your recordings concise and to the point</li>
               </ul>
