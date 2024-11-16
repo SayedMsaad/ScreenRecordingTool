@@ -14,10 +14,22 @@ const ReactMediaRecorder = dynamic(
 const local = localFont({ src: '../../Fonts/GrandisExtended-Black.ttf' })
 const Record = () => {  
 //capital R
+const [isScreenSupported, setIsScreenSupported] = useState(false);
   const mediaInstance = useRef(false);
   const [blobUrl, setblobUrl] = useState(null);
   const [blobdata, setblobdata] = useState(null);
 
+  const checkScreenCaptureSupport = () => {
+    return !!navigator.mediaDevices?.getDisplayMedia;
+  };
+
+  useEffect(() => {
+    setIsScreenSupported(checkScreenCaptureSupport());
+    if (!checkScreenCaptureSupport()) {
+      toast.error("Screen recording is not supported on mobile devices.");
+    }
+  }, [])
+  
   //seting BlobUrl from recatmediaComponent..
   const fetchBlob = (url) => {
     console.log('blob:' + Blob);
