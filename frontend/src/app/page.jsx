@@ -111,7 +111,7 @@ export default function Home() {
             <div className="bg-white p-6 rounded-xl shadow-lg">
               <Play className="h-12 w-12 text-blue-500 mb-4" />
               <h3 className="text-xl font-semibold mb-2">1. Start Recording</h3>
-              <p className="text-gray-600">Click the 'Start Recording' button and choose the area of your screen you want to capture.</p>
+              <p className="text-gray-600">Click the &apos;Start Recording&apos; button and choose the area of your screen you want to capture.</p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-lg">
               <Monitor className="h-12 w-12 text-blue-500 mb-4" />
@@ -121,7 +121,7 @@ export default function Home() {
             <div className="bg-white p-6 rounded-xl shadow-lg">
               <Download className="h-12 w-12 text-blue-500 mb-4" />
               <h3 className="text-xl font-semibold mb-2">3. Save and Share</h3>
-              <p className="text-gray-600">When you're done, save your recording and easily share it with others.</p>
+              <p className="text-gray-600">When you&apos;re done, save your recording and easily share it with others.</p>
             </div>
           </div>
         </section>
