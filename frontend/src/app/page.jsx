@@ -87,7 +87,7 @@ export default function Home() {
               </li>
             </ul>
 
-            <Link href="/record" className="bg-green-400 hover:bg-green-500 transition-colors duration-300 self-start py-4 px-6 rounded-2xl text-white font-semibold flex items-center gap-2">
+            <Link href="/Record" className="bg-green-400 hover:bg-green-500 transition-colors duration-300 self-start py-4 px-6 rounded-2xl text-white font-semibold flex items-center gap-2">
               Get Started
               <ArrowRight className="h-5 w-5" />
             </Link>
@@ -153,7 +153,7 @@ export default function Home() {
           <p className="max-w-3xl mx-auto text-sm md:text-base text-gray-600 mb-8">
             Join thousands of users who are already creating amazing screen recordings with our tool.
           </p>
-          <Link href="/record" className="inline-block bg-blue-500 hover:bg-blue-600 transition-colors duration-300 py-4 px-8 rounded-2xl text-white font-semibold text-lg">
+          <Link href="/Record" className="inline-block bg-blue-500 hover:bg-blue-600 transition-colors duration-300 py-4 px-8 rounded-2xl text-white font-semibold text-lg">
             Start Recording Now
           </Link>
         </section>
