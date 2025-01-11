@@ -11,7 +11,7 @@ const port = 5000;//port number
 
 //middlewares
 app.use(cors({
-    origin:'http://localhost:3000', 
+    origin:['http://localhost:3000','https://screen-recording-tool.vercel.app'],
     credentials: true
 }))//this allows the cross origin request from port 3000
 app.use(express.json());//this middleware is used to convert json_req to object_req value.
