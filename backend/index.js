@@ -7,7 +7,7 @@ const cookieParser =require('cookie-parser');
 
 
 const app = express();//express object;
-const port = 5000;//port number
+const port = process.env.PORT||5000;//port number
 
 //middlewares
 app.use(cors({
