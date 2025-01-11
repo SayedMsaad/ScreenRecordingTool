@@ -1,5 +1,6 @@
 const express = require('express');
 const userRout = require('./Routers/userRouter')
+const videoRout =require('./Routers/videoRouterr')
 const cors = require('cors');
 const cookieParser =require('cookie-parser');
 
@@ -16,6 +17,7 @@ app.use(cors({
 app.use(express.json());//this middleware is used to convert json_req to object_req value.
 app.use(cookieParser());
 app.use('/u',userRout);//this passes all req(/u) to UserRouter
+app.use('/video',videoRout);
 
 app.get('/setCookie',(req,res)=>{
 

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { Camera, Download, Upload, Video, Play, AlertCircle, Maximize2 } from 'lucide-react'
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
@@ -15,6 +16,7 @@ const ReactMediaRecorder = dynamic(
 export default function RecordComponent() {
   const [blobUrl, setBlobUrl] = useState(null)
   const [showVideo, setShowVideo] = useState(false)
+  const Router = useRouter();
 
   const fetchBlob = (url) => {
     setBlobUrl(url)
@@ -48,21 +50,37 @@ export default function RecordComponent() {
       if (blob) {
         const fd = new FormData()
         fd.append('file', blob)
-        fd.append('upload_preset', 'mypreset')
+        fd.append('upload_preset', 'screen_recordings')
         fd.append('cloud_name', 'dhrsze4te')
 
         try {
+        const token = localStorage.getItem('Usertoken');
+        const user = JSON.parse(localStorage.getItem('user'));
+          if (!token || !user) {
+            toast.error("User not authenticated");
+            Router.push('/');
+            return;
+          }
           const result = await axios.post(
             'https://api.cloudinary.com/v1_1/dhrsze4te/video/upload',
             fd,
             { headers: { 'Content-Type': 'multipart/form-data' } }
           )
-          toast.success("File uploaded successfully")
           console.log(result.data)
+          const videoUrl = result.data.secure_url;
+          
+          await axios.post('http://localhost:5000/video/api/recordings',{ url: videoUrl},{headers:{
+              'x-auth-token': token,
+            }}
+          );
+          
+          toast.success("File uploaded successfully")
+
         } catch (err) {
           toast.error("Cannot upload file")
           console.error(err)
         }
+       
       }
     }
   }

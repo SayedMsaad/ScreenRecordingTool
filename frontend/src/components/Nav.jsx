@@ -4,15 +4,17 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Video, Home, List, LogIn } from 'lucide-react'
+import useAppContext from '@/context/AppContext'
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { logout, loggedIn } = useAppContext();
   const pathname = usePathname()
 
   const navItems = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Record', href: '/Record', icon: Video },
-    { name: 'Recordings', href: '/recordings', icon: List },
+    { name: 'Recordings', href: '/Recording', icon: List },
   ]
 
   return (
@@ -42,13 +44,20 @@ export default function Nav() {
             ))}
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <Link
-              href="/authenticate"
+            {/* <Link
+              href="/Authenticate"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <LogIn className="h-4 w-4 mr-2" />
               Sign In
-            </Link>
+            </Link> */}
+            {!loggedIn ? (
+                        <Link href="/Authenticate" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Login Now</Link>
+                      ) : (
+                        <button onClick={logout} className="border p-4">
+                          Logout
+                        </button>
+                      )}
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
             <button

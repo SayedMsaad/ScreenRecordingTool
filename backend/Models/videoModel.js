@@ -1,8 +1,9 @@
-const { Schema, model } = require('../connection');
+const { Schema, model,Types } = require('../connection');
 
 const mySchema = new Schema({
-    title: {
-        type: String,
+    userId: {
+        type:Types.ObjectId,
+        ref: 'SrcUser',
         required: true,
     },
     url: {
@@ -21,4 +22,4 @@ const mySchema = new Schema({
 // next();
 // })
 
-module.exports = model('SrcUser', mySchema);
+module.exports = model('Recordings', mySchema);

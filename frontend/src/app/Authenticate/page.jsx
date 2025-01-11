@@ -11,8 +11,9 @@ import { Vortex } from "@/components/ui/vortex"
 import { Back } from "@/components/ui/background-gradient-animation"
 // import Meteors from '@/components/magicui/meteors';
 // import Scene from '@/Component/Scene'
+import { useRouter } from "next/navigation";
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 const Authenticate = () => {
     // toggle states 
@@ -29,11 +30,8 @@ const Authenticate = () => {
         const router = useRouter();
         const loginSchema = Yup.object().shape({
             email: Yup.string().email("Invalid Email").required('required'),
-            password: Yup.string().required('Required')
-                .matches(/[a-z]/, 'must include lowecase')
-                .matches(/[A-Z]/, 'must include uppercase')
-                .matches(/[0-9]/, 'must include number')
-                .matches(/\W/, 'must include special charchter'),
+            password: Yup.string().required('Required'),
+                
         })
         const loginForm = useFormik({
             initialValues: {
@@ -43,11 +41,13 @@ const Authenticate = () => {
             onSubmit: (values, { resetForm, setSubmitting }) => {
                 console.log(values);
                 setSubmitting = false;
-                axios.post('http://localhost:5000/u/authenticate', values, { withCredentials: true })
+                axios.post('http://localhost:5000/u/authenticate', values)
                     .then((result) => {
-                        console.log(result.data.message);
+                        // console.log(result.response.data.message);
                         if (result.data.isValid) {
                             toast.success("Login Succesfull");
+                            localStorage.setItem("user", JSON.stringify(result.data.user));
+                            localStorage.setItem("Usertoken",result.data.token);
                             resetForm();
                             router.push('/');
 
@@ -56,10 +56,14 @@ const Authenticate = () => {
                             toast.error("Invalid credentials");
                             displayOn();
                             setSubmitting = true;
-
                         }
 
                     }).catch((err) => {
+                        if(!err.response.data.isValid){
+                            toast.error("Invalid credentials");
+                            displayOn();
+                            setSubmitting = true;
+                        }
                         console.log(err);
                     });
 
@@ -114,7 +118,7 @@ const Authenticate = () => {
 
     const DisplaySignUp = () => {
 
-
+        const router =useRouter();
         const signUpSchema = Yup.object().shape({
             name: Yup.string()
                 .required('Required')
@@ -127,10 +131,10 @@ const Authenticate = () => {
 
             password: Yup.string()
                 .required('Required')
-                .matches(/[a-z]/, 'must include lowecase')
-                .matches(/[A-Z]/, 'must include uppercase')
-                .matches(/[0-9]/, 'must include number')
-                .matches(/\W/, 'must include special charchter'),
+                .matches(/[a-z]/, 'must include lowecase'),
+                // .matches(/[A-Z]/, 'must include uppercase')
+                // .matches(/[0-9]/, 'must include number')
+                // .matches(/\W/, 'must include special charchter'),
 
             confirmPassword: Yup.string()
                 .oneOf([Yup.ref('password'), null], 'Passwords does not match'),
@@ -142,17 +146,26 @@ const Authenticate = () => {
                 password: '',
                 confirmPassword: '',
             },
-            onSubmit: (values, { resetForm }) => {
+            onSubmit: (values, { resetForm, setSubmitting }) => {
                 // console.log(values);
-                axios.post("http://localhost:5000/u/addUser", values, { withCredentials: true }).then((result) => {
-                    console.log(result.status);
-                    console.log(result.data);
+                axios.post("http://localhost:5000/u/addUser", values).then((response) => {
+                    console.log(response.status);
+                    // console.log(response.data);
 
+                    // localStorage.setItem('Usertoken',response.data.token);
+                    
+                    toast.success("user added successfully");
+                    resetForm();
+                    switchModes();
+                    // router.push("/");
                 }).catch((err) => {
                     console.log(err)
-
+                    if (err.response.data.code === 11000) {
+                        toast.error("Email already exists");
+                      }
+                      setSubmitting(false);
                 });
-                resetForm();
+                
             },
             validationSchema: signUpSchema,
 
