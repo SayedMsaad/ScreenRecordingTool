@@ -41,7 +41,7 @@ const Authenticate = () => {
             onSubmit: (values, { resetForm, setSubmitting }) => {
                 console.log(values);
                 setSubmitting = false;
-                axios.post('http://localhost:5000/u/authenticate', values)
+                axios.post('https://screenrecordingtool.onrender.com/u/authenticate', values)
                     .then((result) => {
                         // console.log(result.response.data.message);
                         if (result.data.isValid) {
@@ -49,7 +49,7 @@ const Authenticate = () => {
                             localStorage.setItem("user", JSON.stringify(result.data.user));
                             localStorage.setItem("Usertoken",result.data.token);
                             resetForm();
-                            router.push('/');
+                            router.push('/'); 
 
                         } else {
                             //    resetForm();\
@@ -148,7 +148,7 @@ const Authenticate = () => {
             },
             onSubmit: (values, { resetForm, setSubmitting }) => {
                 // console.log(values);
-                axios.post("http://localhost:5000/u/addUser", values).then((response) => {
+                axios.post("https://screenrecordingtool.onrender.com/u/addUser", values).then((response) => {
                     console.log(response.status);
                     // console.log(response.data);
 

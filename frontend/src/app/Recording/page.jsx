@@ -16,7 +16,7 @@ const Recording = () => {
         const token = localStorage.getItem('Usertoken');
         if (!token) throw new Error("User not authenticated");
 
-        const response = await axios.get('http://localhost:5000/video/api/recordings', {
+        const response = await axios.get('https://screenrecordingtool.onrender.com/video/api/recordings', {
           headers: { 'x-auth-token': token },
         });
         setRecordings(response.data);
@@ -25,7 +25,7 @@ const Recording = () => {
         alert("Failed to load recordings");
       } finally {
         setLoading(false);
-      }
+      } 
     };
     fetchRecordings();
   }, []);

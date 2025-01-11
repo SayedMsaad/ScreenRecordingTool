@@ -69,7 +69,7 @@ export default function RecordComponent() {
           console.log(result.data)
           const videoUrl = result.data.secure_url;
           
-          await axios.post('http://localhost:5000/video/api/recordings',{ url: videoUrl},{headers:{
+          await axios.post('https://screenrecordingtool.onrender.com/video/api/recordings',{ url: videoUrl},{headers:{
               'x-auth-token': token,
             }}
           );

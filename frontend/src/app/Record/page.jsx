@@ -386,6 +386,6 @@ export default function Record() {
       router.push('/unsupported')
     }
   }, [router])
-
+ 
   return <RecordComponent />
 }
